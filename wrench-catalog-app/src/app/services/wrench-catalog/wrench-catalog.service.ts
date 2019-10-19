@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpResponse, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { environment } from '../../../environments/environment';
 
@@ -14,13 +13,15 @@ export class WrenchCatalogService {
   constructor(private http: HttpClient) {
   }
 
-  GetCatalog(): Observable<HttpResponse<WrenchCatalog[]>> {
+  GetCatalog() {
     const apiKey: string = environment.wrenchCatalogServiceApiKey;
     const endpoint: string = environment.wrenchCatalogServiceEndpoint;
 
-    const customHeaders: HttpHeaders = new HttpHeaders();
-    customHeaders.set('x-api-key', apiKey);
+    let customHeaders: HttpHeaders = new HttpHeaders();
+    customHeaders = customHeaders.set('x-api-key', apiKey);
 
-    return this.http.get<WrenchCatalog[]>(endpoint, { observe: 'response', headers : customHeaders });
+    const promise = this.http.get<WrenchCatalog>(endpoint, { observe: 'response', headers : customHeaders }).toPromise();
+    
+    return promise;
   }
 }
