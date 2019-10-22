@@ -27,9 +27,7 @@ export class CatalogComponent implements OnInit {
 
   serviceError: Object;
 
-  catagories: string[];
-
-  activeCategory: string;
+  loading: boolean = true;
 
   @ViewChildren(NgbdSortableHeaderDirective) headers: QueryList<NgbdSortableHeaderDirective>;
 
@@ -45,11 +43,14 @@ export class CatalogComponent implements OnInit {
       response => {
         console.log(response);
         this.catalog = response.catalog;
-        this.sortedCatalog = response.catalog;
+        this.catalog = this.wrenchCatalogService.correctMissingData(this.catalog);
+        this.sortedCatalog = this.catalog;
+        this.loading = false;
       },
       error => {
         console.log(error);
         this.serviceError = error;
+        this.loading = false;
       }
     );
   }
@@ -69,12 +70,17 @@ export class CatalogComponent implements OnInit {
       }
     });
 
-    // sorting countries
+    // sorting services
     if (direction === '') {
       this.sortedCatalog = this.catalog;
     } else {
       this.sortedCatalog = [...this.catalog].sort((a, b) => {
-        const res = compare(a[column], b[column]);
+        let res = undefined;
+        if (column === 'price') {
+          res = this.wrenchCatalogService.comparePrice(a[column], b[column]);
+        } else {
+          res = compare(a[column], b[column]);''
+        }
         return direction === 'asc' ? res : -res;
       });
     }

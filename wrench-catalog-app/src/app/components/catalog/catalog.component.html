@@ -1,4 +1,10 @@
-<p> Mechanical Services </p>
+<div *ngIf="serviceError || (!catalog && loading == false) || (catalog.length == 0 && loading == false)">
+    <p>
+        <ngb-alert [dismissible]="false">
+            <strong>Warning!</strong> Something went wrong.  Please try again later.
+        </ngb-alert>
+    </p>
+</div>
 <div class="container-fluid">
     <div class="row">
         <div class="col-8">
@@ -6,7 +12,7 @@
                 <thead>
                     <tr>
                         <th scope="col">#</th>
-                        <th scope="col" sortable="name" (sort)="onSort($event)">Name</th>
+                        <th scope="col" sortable="name" (sort)="onSort($event)">Name<div></div></th>
                         <th scope="col" sortable="category" (sort)="onSort($event)">Category</th>
                         <th scope="col">Description</th>
                         <th scope="col" sortable="price" (sort)="onSort($event)">Price</th>
@@ -29,12 +35,4 @@
             <app-shopping-cart></app-shopping-cart>
         </div>
     </div>
-</div>
-
-<div *ngIf="serviceError">
-    <p>
-        <ngb-alert [dismissible]="false">
-            <strong>Warning!</strong> Something went wrong.  Please try again later.
-        </ngb-alert>
-    </p>
 </div>
