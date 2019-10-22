@@ -5,7 +5,11 @@
 
 1. Install node.js
 2. Install the Angular CLI (v8.3.12)
-    npm install -g @angular/cli
+```
+npm install -g @angular/cli
+```
 3. Build and run the application from inside the wrench-catalog-app folder
-    ng serve
+```
+ng serve
+```
 4. Navigate to http://localhost:4200/catalog
