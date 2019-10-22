@@ -15,6 +15,7 @@ import { CatalogComponent } from './components/catalog/catalog.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { HeaderComponent } from './components/header/header.component';
 import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.component';
+import { NgbdSortableHeaderDirective } from './directives/ngbd-sortable-header/ngbd-sortable-header.directive';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.
     CatalogComponent,
     FooterComponent,
     HeaderComponent,
-    ShoppingCartComponent
+    ShoppingCartComponent,
+    NgbdSortableHeaderDirective
   ],
   imports: [
     BrowserModule,

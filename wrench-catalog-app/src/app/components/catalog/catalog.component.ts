@@ -1,6 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChildren, QueryList } from '@angular/core';
 
 import { WrenchService } from '../../services/wrench-catalog/models/wrench-service.model';
+
+import { NgbdSortableHeaderDirective } from '../../directives/ngbd-sortable-header/ngbd-sortable-header.directive';
+import { SortEvent } from '../../directives/ngbd-sortable-header/ngbd-sortable-header.directive';
+import { compare } from '../../directives/ngbd-sortable-header/ngbd-sortable-header.directive';
 
 import { WrenchCatalogService } from '../../services/wrench-catalog/wrench-catalog.service';
 import { ShoppingCartService } from '../../services/shopping-cart/shopping-cart.service';
@@ -19,11 +23,15 @@ export class CatalogComponent implements OnInit {
 
   catalog: WrenchService[];
 
+  sortedCatalog: WrenchService[];
+
   serviceError: Object;
 
   catagories: string[];
 
   activeCategory: string;
+
+  @ViewChildren(NgbdSortableHeaderDirective) headers: QueryList<NgbdSortableHeaderDirective>;
 
   ngOnInit() {
     this.catalog = [];
@@ -37,6 +45,7 @@ export class CatalogComponent implements OnInit {
       response => {
         console.log(response);
         this.catalog = response.catalog;
+        this.sortedCatalog = response.catalog;
       },
       error => {
         console.log(error);
@@ -48,5 +57,26 @@ export class CatalogComponent implements OnInit {
   addToCart(index) {
     const service = this.catalog[index];
     this.shoppingCartService.addToCart(service);
+  }
+
+  // Source: https://ng-bootstrap.github.io/#/components/table/examples
+  onSort({column, direction}: SortEvent) {
+
+    // resetting other headers
+    this.headers.forEach(header => {
+      if (header.sortable !== column) {
+        header.direction = '';
+      }
+    });
+
+    // sorting countries
+    if (direction === '') {
+      this.sortedCatalog = this.catalog;
+    } else {
+      this.sortedCatalog = [...this.catalog].sort((a, b) => {
+        const res = compare(a[column], b[column]);
+        return direction === 'asc' ? res : -res;
+      });
+    }
   }
 }

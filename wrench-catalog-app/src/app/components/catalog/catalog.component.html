@@ -6,21 +6,21 @@
                 <thead>
                     <tr>
                         <th scope="col">#</th>
-                        <th scope="col" (sort)="onSort($event)">Name</th>
-                        <th scope="col" (sort)="onSort($event)">Category</th>
+                        <th scope="col" sortable="name" (sort)="onSort($event)">Name</th>
+                        <th scope="col" sortable="category" (sort)="onSort($event)">Category</th>
                         <th scope="col">Description</th>
-                        <th scope="col" (sort)="onSort($event)">Price</th>
+                        <th scope="col" sortable="price" (sort)="onSort($event)">Price</th>
                         <th scope="col"></th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let service of catalog; let i = index">
+                    <tr *ngFor="let service of sortedCatalog; let i = index">
                         <th scope="row">{{ i + 1 }}</th>
                         <td>{{ service.name }} </td>
                         <td>{{ service.category }}</td>
                         <td>{{ service.description }}</td>
                         <td>{{ service.price}}</td>
-                        <td><button (click)="addToCart(i)">Add to Cart</button></td>
+                        <td><button type="button" class="btn btn-primary" (click)="addToCart(i)">Add</button></td>
                     </tr>
                 </tbody>
             </table>
