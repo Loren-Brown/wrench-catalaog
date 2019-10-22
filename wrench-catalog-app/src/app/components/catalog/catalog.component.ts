@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 
-import { WrenchCatalog } from '../../services/wrench-catalog/models/wrench-catalog.model';
+import { WrenchService } from '../../services/wrench-catalog/models/wrench-service.model';
+
 import { WrenchCatalogService } from '../../services/wrench-catalog/wrench-catalog.service';
+import { ShoppingCartService } from '../../services/shopping-cart/shopping-cart.service';
 
 @Component({
   selector: 'app-catalog',
@@ -10,29 +12,41 @@ import { WrenchCatalogService } from '../../services/wrench-catalog/wrench-catal
 })
 export class CatalogComponent implements OnInit {
 
-  constructor(private wrenchCatalogService: WrenchCatalogService) { }
+  constructor(
+    private wrenchCatalogService: WrenchCatalogService,
+    private shoppingCartService: ShoppingCartService
+  ) { }
 
-  catalog: WrenchCatalog;
+  catalog: WrenchService[];
+
+  serviceError: Object;
 
   catagories: string[];
 
   activeCategory: string;
 
-
   ngOnInit() {
+    this.catalog = [];
+    //this.serviceError = "test error";
     this.updateCatalog();
   }
 
   updateCatalog() {
-    const promise = this.wrenchCatalogService.GetCatalog();
-
-    promise.then((data)=>{
-      console.log("Promise resolved with: " + JSON.stringify(data));
-      const body = data.body;
-      this.catalog = body;
-    }).catch((error)=>{
-      console.log("Promise rejected with " + JSON.stringify(error));
-    });
+    this.wrenchCatalogService.GetCatalog()
+    .subscribe(
+      response => {
+        console.log(response);
+        this.catalog = response.catalog;
+      },
+      error => {
+        console.log(error);
+        this.serviceError = error;
+      }
+    );
   }
 
+  addToCart(index) {
+    const service = this.catalog[index];
+    this.shoppingCartService.addToCart(service);
+  }
 }

@@ -1,0 +1,25 @@
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col" (sort)="onSort($event)">Name</th>
+            <th scope="col" (sort)="onSort($event)">Price</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let service of cart; let i = index">
+            <td>{{ service.name }} </td>
+            <td>{{ service.price}}</td>
+            <td><button (click)="removeFromCart(i)">Remove</button></td>
+        </tr>
+    </tbody>
+</table>
+<div class="container-fluid">
+        <div class="row">
+            <div class="col">
+                <button (click)="emptyCart()">Empty Cart</button>
+            </div>
+            <div class="col">
+                <button (click)="checkout()">Book Now</button>
+            </div>
+        </div>
+</div>

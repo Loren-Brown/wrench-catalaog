@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 
 import { environment } from '../../../environments/environment';
 
-import { WrenchCatalog } from './models/wrench-catalog.model';
+import { WrenchService } from './models/wrench-service.model';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -13,15 +14,15 @@ export class WrenchCatalogService {
   constructor(private http: HttpClient) {
   }
 
-  GetCatalog() {
+  GetCatalog(): Observable<any> {
     const apiKey: string = environment.wrenchCatalogServiceApiKey;
     const endpoint: string = environment.wrenchCatalogServiceEndpoint;
 
     let customHeaders: HttpHeaders = new HttpHeaders();
     customHeaders = customHeaders.set('x-api-key', apiKey);
 
-    const promise = this.http.get<WrenchCatalog>(endpoint, { observe: 'response', headers : customHeaders }).toPromise();
+    const response = this.http.get<any>(endpoint, { headers : customHeaders });
     
-    return promise;
+    return response;
   }
 }
