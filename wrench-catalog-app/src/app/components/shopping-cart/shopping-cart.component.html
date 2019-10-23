@@ -9,18 +9,18 @@
     <tbody>
         <tr *ngFor="let service of cart; let i = index">
             <td>{{ service.name }} </td>
-            <td>{{ service.price}}</td>
+            <td>${{ service.price }}</td>
             <td><button type="button" class="btn btn-secondary" (click)="removeFromCart(i)">Remove</button></td>
         </tr>
     </tbody>
 </table>
 <div class="container-fluid">
-        <div class="row">
-            <div class="col-4">
-                <button type="button" class="btn btn-secondary" (click)="emptyCart()">Empty Cart</button>
-            </div>
-            <div class="col-8">
-                <button type="button" class="btn btn-primary" (click)="checkout()">Book Now</button>
-            </div>
+    <div class="row">
+        <div class="col-4">
+            <button type="button" class="btn btn-secondary" (click)="emptyCart()">Empty Cart</button>
         </div>
+        <div class="col-8 text-center">
+            <p>Total: ${{total | number : '1.2-2'}}</p>
+        </div>
+    </div>
 </div>

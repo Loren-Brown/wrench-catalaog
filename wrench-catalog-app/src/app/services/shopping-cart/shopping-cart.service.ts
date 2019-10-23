@@ -68,4 +68,23 @@ export class ShoppingCartService {
 
     return cart;
   }
+
+  public getTotal(): number {
+    const cart: WrenchService[] = this.storage.get(STORAGE_KEY) || [];
+    let total = 0;
+
+    for(var entry of cart) {
+      let price = parseFloat(entry.price);
+      if (!isNaN(price)) {
+        total += price;
+      }
+    }
+
+    return total;
+  }
+
+  public bookNow() {
+    // publish event
+    this._subject.next('bookNow');
+  }
 }

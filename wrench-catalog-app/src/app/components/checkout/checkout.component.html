@@ -1,0 +1,32 @@
+<div class="modal-header">
+    <h4 class="modal-title">Book Now</h4>
+    <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col" sortable="name" (sort)="onSort($event)">Name<div></div></th>
+                <th scope="col" sortable="category" (sort)="onSort($event)">Category</th>
+                <th scope="col">Description</th>
+                <th scope="col" sortable="price" (sort)="onSort($event)">Price</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let service of cart; let i = index">
+                <td>{{ service.name }} </td>
+                <td>{{ service.category }}</td>
+                <td>{{ service.description }}</td>
+                <td>{{ service.price}}</td>
+            </tr>
+        </tbody>
+    </table>
+    <h2>Total: ${{ total | number : '1.2-2' }}</h2>
+
+</div>
+<div class="modal-footer">  
+    <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">Close</button> 
+</div>

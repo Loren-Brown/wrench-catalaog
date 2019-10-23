@@ -19,7 +19,8 @@ export class CatalogComponent implements OnInit {
   constructor(
     private wrenchCatalogService: WrenchCatalogService,
     private shoppingCartService: ShoppingCartService
-  ) { }
+  ) { 
+  }
 
   catalog: WrenchService[];
 
@@ -33,7 +34,6 @@ export class CatalogComponent implements OnInit {
 
   ngOnInit() {
     this.catalog = [];
-    //this.serviceError = "test error";
     this.updateCatalog();
   }
 
@@ -58,6 +58,11 @@ export class CatalogComponent implements OnInit {
   addToCart(index) {
     const service = this.catalog[index];
     this.shoppingCartService.addToCart(service);
+  }
+
+  isNumber(entry: string): boolean {
+    const num = Number(entry);
+    return !isNaN(num);
   }
 
   // Source: https://ng-bootstrap.github.io/#/components/table/examples

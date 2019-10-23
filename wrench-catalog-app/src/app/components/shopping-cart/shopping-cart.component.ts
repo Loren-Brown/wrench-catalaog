@@ -13,9 +13,12 @@ export class ShoppingCartComponent implements OnInit {
 
   cart: WrenchService[];
 
+  total: number;
+
   constructor(private shoppingCartService: ShoppingCartService) { }
 
   ngOnInit() {
+    this.total = 0.00;
     this.updateCart();
     this.shoppingCartService.events$.forEach(event => this.updateCart());
   }
@@ -30,11 +33,8 @@ export class ShoppingCartComponent implements OnInit {
     this.cart = this.shoppingCartService.getCart();
   }
 
-  checkout() {
-    // TODO
-  }
-
   updateCart() {
     this.cart = this.shoppingCartService.getCart();
+    this.total = this.shoppingCartService.getTotal();
   }
 }

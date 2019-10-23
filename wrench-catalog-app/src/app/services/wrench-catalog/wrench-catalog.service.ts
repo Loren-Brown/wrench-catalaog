@@ -42,6 +42,11 @@ export class WrenchCatalogService {
   }
 
   public correctMissingData(services: WrenchService[]): WrenchService[] {
+    // Undefined check
+    if (!services) {
+      return [];
+    }
+
     // Remove entires
     services.filter(entry => (entry.category && entry.description && entry.name));
 

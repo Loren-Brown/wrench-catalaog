@@ -16,6 +16,7 @@ import { FooterComponent } from './components/footer/footer.component';
 import { HeaderComponent } from './components/header/header.component';
 import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.component';
 import { NgbdSortableHeaderDirective } from './directives/ngbd-sortable-header/ngbd-sortable-header.directive';
+import { CheckoutComponent } from './components/checkout/checkout.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { NgbdSortableHeaderDirective } from './directives/ngbd-sortable-header/n
     FooterComponent,
     HeaderComponent,
     ShoppingCartComponent,
-    NgbdSortableHeaderDirective
+    NgbdSortableHeaderDirective,
+    CheckoutComponent
   ],
   imports: [
     BrowserModule,
@@ -37,6 +39,11 @@ import { NgbdSortableHeaderDirective } from './directives/ngbd-sortable-header/n
     WrenchCatalogService,
     ShoppingCartService
   ],
-  bootstrap: [AppComponent]
+  entryComponents: [
+    CheckoutComponent
+  ],
+  bootstrap: [
+    AppComponent
+  ]
 })
 export class AppModule { }
