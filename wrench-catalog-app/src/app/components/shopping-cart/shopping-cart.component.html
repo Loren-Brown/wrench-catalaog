@@ -1,3 +1,4 @@
+<h2 class="text-center">Current Cart</h2>
 <table class="table table-striped">
     <thead>
         <tr>
@@ -14,10 +15,11 @@
         </tr>
     </tbody>
 </table>
+<h4 *ngIf="cart.length === 0" class="text-center text-muted">Cart Empty</h4>
 <div class="container-fluid">
     <div class="row">
         <div class="col-4">
-            <button type="button" class="btn btn-secondary" (click)="emptyCart()">Empty Cart</button>
+            <button [disabled]="cart.length === 0" type="button" class="btn btn-secondary" (click)="emptyCart()">Empty Cart</button>
         </div>
         <div class="col-8 text-center">
             <p>Total: ${{total | number : '1.2-2'}}</p>
