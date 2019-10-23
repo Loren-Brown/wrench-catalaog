@@ -1,4 +1,4 @@
-# wrench-catalaog
+# wrench-catalog
  Application to shop for Wrench services
 
  Installation instructions
