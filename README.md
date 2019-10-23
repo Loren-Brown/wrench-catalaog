@@ -8,8 +8,7 @@
 ```
 npm install -g @angular/cli
 ```
-5. Populate the API key and API endpoint in the Angular environemnt files
-[wrench-catalog-app/src/environments](https://github.com/Loren-Brown/wrench-catalaog/tree/master/wrench-catalog-app/src/environments)
+5. Populate the API key and API endpoint in the [Angular environemnt files](https://github.com/Loren-Brown/wrench-catalaog/tree/master/wrench-catalog-app/src/environments)
 4. Build and run the application from inside the wrench-catalog-app folder
 ```
 ng serve
